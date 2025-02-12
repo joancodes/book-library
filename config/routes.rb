@@ -15,13 +15,13 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   # Borrowings
-  resources :books, only: [:index, :show] do
-    resources :borrowings, only: [:create]
+  resources :books, only: [ :index, :show ] do
+    resources :borrowings, only: [ :create ]
   end
-  resources :borrowings, only: [:destroy]
+  resources :borrowings, only: [ :destroy ]
 
   # User profile
-  get 'profile', to: 'borrowings#profile'
+  get "profile", to: "borrowings#profile"
 
-  root 'books#index'
+  root "books#index"
 end

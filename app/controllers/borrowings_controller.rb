@@ -1,5 +1,4 @@
 class BorrowingsController < ApplicationController
-
   def create
     @book = Book.find(params[:book_id])
     @borrowing = Current.user.borrowings.new(book: @book, due_date: 2.weeks.from_now)
