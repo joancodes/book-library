@@ -13,4 +13,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+
+  # Borrowings
+  resources :books, only: [:index, :show] do
+    resources :borrowings, only: [:create]
+  end
+  resources :borrowings, only: [:destroy]
+
+  # User profile
+  get 'profile', to: 'borrowings#profile'
+
+  root 'books#index'
 end
