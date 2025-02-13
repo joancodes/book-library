@@ -1,24 +1,72 @@
-# README
+# Book Lending Library
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple book lending library application built with Ruby on Rails 8.
 
-Things you may want to cover:
+## Setup
 
-* Ruby version
+1. Clone the repository:
+   
+  ```bash
+  git clone https://github.com/your-username/book-library.git
+  cd book-library
+  ```
 
-* System dependencies
+2. Install dependencies:
 
-* Configuration
+  ```bash
+  bundle install
+  yarn install
+  ```
 
-* Database creation
+3. Set up the database:
 
-* Database initialization
+  ```bash
+  rails db:setup
+  ```
 
-* How to run the test suite
+4. Populate the database with random books:
 
-* Services (job queues, cache servers, search engines, etc.)
+  ```bash
+  rails db:seed
+  ```
+5. Run the application:
 
-* Deployment instructions
+  ```bash
+  rails server
+  ```
+6. Visit http://localhost:3000 in your browser.
 
-* ...
+## Running Tests
+Run the test suite with:
+
+```bash
+rails test
+```
+
+### Generating Random Books
+To populate the database with random books for development, run:
+
+```bash
+rails db:seed
+This will create 50 random books using the Faker gem.
+```
+
+### Play Around with the Data
+After running `rails db:seed`, you can start the Rails server and visit `http://localhost:3000` to see the random books in action. You can also use the Rails console to interact with the data:
+
+```bash
+rails console
+```
+In the console, you can query the books:
+
+```ruby
+Book.count # Should return 50
+Book.first # Returns the first book
+Book.last # Returns the last book
+```
+
+
+
+
+
+
