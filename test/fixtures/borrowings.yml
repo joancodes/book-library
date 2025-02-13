@@ -1,11 +1,12 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<% due_date = 2.weeks.from_now %>
 
 one:
   user: one
   book: one
-  due_date: 2025-02-12
+  due_date: <%= due_date %>
 
 two:
   user: two
   book: two
-  due_date: 2025-02-12
+  due_date: <%= due_date %>
