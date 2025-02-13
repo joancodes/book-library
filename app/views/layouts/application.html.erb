@@ -29,22 +29,15 @@
         <%= link_to "Book Library", root_path, class: "text-xl font-bold" %>
         <div>
           <% if authenticated? %>
-            <%= link_to "Profile", profile_path, class: "mr-4 hover:text-gray-200" %>
+            <%= link_to "Profile (#{Current.user.email_address})", profile_path, class: "mr-4 hover:text-gray-200" %>
             <%= button_to "Sign Out", session_path, method: :delete, class: "bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600" %>
           <% else %>
             <%= link_to "Sign In", new_session_path, class: "mr-4 hover:text-gray-200" %>
-            <%# link_to "Sign Up", new_user_registration_path, class: "bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" %>
+            <%= link_to "Sign Up", new_registration_path, class: "bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600" %>
           <% end %>
         </div>
       </div>
     </nav>
-
-    <!-- Flash Messages -->
-    <% flash.each do |type, message| %>
-      <div class="flash <%= type %> px-4 py-2 rounded mb-4 text-center <%= type == 'notice' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700' %>">
-        <%= message %>
-      </div>
-    <% end %>
 
     <div class="container mx-auto px-4 py-8">
       <%= yield %>
