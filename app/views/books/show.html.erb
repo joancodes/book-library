@@ -1,13 +1,28 @@
+<%= render "layouts/alerts" %>
+
 <div class="container mx-auto px-4 py-8">
   <div class="max-w-2xl mx-auto bg-white shadow-lg rounded-lg p-6">
     <h1 class="text-3xl font-bold mb-4"><%= @book.title %></h1>
     <p class="text-gray-600 mb-2">Author: <%= @book.author %></p>
     <p class="text-gray-600 mb-4">ISBN: <%= @book.isbn %></p>
 
-    <% if @book.borrowings.exists? %>
-      <p class="text-red-500 mb-4">This book is currently borrowed.</p>
+    <% if authenticated? %>
+      <% if @book.borrowings.exists?(user: Current.user) %>
+        <p class="text-red-500 mb-4">You have currently borrowed this book.</p>
+        <p>Navigate to your <%= link_to "Profile", profile_path, class: "text-blue-600 hover:text-blue-800" %> to view your borrowed books or return them.</p>
+      <% elsif @book.borrowings.exists? %>
+        <p class="text-red-500 mb-4">This book is currently borrowed by another user.</p>
+      <% else %>
+        <%= button_to "Borrow", book_borrowings_path(@book), method: :post, class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600" %>
+      <% end %>
     <% else %>
-      <%= button_to "Borrow", book_borrowings_path(@book), method: :post, class: "bg-blue-500 text-red-50 px-4 py-2 rounded hover:bg-blue-600" %>
+      <% if @book.borrowings.exists? %>
+        <p class="text-red-500 mb-4">This book has already been borrowed.</p>
+        <p class="text-sm text-gray-600">Please <%= link_to "Sign In", new_session_path, class: "text-center text-blue-600 hover:text-blue-800" %> to borrow other available books.</p>
+      <% else %>
+        <p class="text-green-500 mb-4">Available to Borrow</p>
+        <p class="text-sm text-gray-600">Please <%= link_to "Sign In", new_session_path, class: "text-center text-blue-600 hover:text-blue-800" %> to borrow this book.</p>
+      <% end %>
     <% end %>
 
     <%= link_to "Back to Books", books_path, class: "mt-4 inline-block text-blue-600 hover:text-blue-800" %>
